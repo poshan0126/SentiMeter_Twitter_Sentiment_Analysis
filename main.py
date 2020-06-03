@@ -17,10 +17,10 @@ class SentimentAnalysis:
 
     def DownloadData(self):
         # authenticating with twitter keys
-        consumerKey = 'uPYrQ6WzY7kLDTp9EI50isjOM'
-        consumerSecret = 'PduYBfVaMAVU4gA6nMpQGWzPy33GcAKIYWwn0bOSJInKrTXf5Z'
-        accessToken = '3548327834-XwsBzgpCIw1kxuavRTGXEs8ehPuDJfjiNoO09GM'
-        accessTokenSecret = 'vnsHaP1rMfTvGj2YXAOYLTXaAtT28Y3kGD0kdOb439Yly'
+        consumerKey = 'No Sharing of Keys for Privacy,Enter your own key'
+        consumerSecret = 'No Sharing of Keys for Privacy,Enter your own key'
+        accessToken = 'No Sharing of Keys for Privacy,Enter your own key'
+        accessTokenSecret = 'No Sharing of Keys for Privacy,Enter your own key'
         auth = tweepy.OAuthHandler(consumerKey, consumerSecret)
         auth.set_access_token(accessToken, accessTokenSecret)
         api = tweepy.API(auth)
