@@ -4,30 +4,50 @@
 
 
 # Importing required libraries
+import streamlit as st
 import sys,tweepy,csv,re
 from textblob import TextBlob
 import matplotlib.pyplot as plt
+import webbrowser
+
+
+
+
+
 
 # Sentiment Analysis class reads and analyzes all the tweets. Also It make use of cleanTweet and Percentage functions
 class SentimentAnalysis:
 
+
     def __init__(self):
+        st.title("Sentimeter: Tweet Sentiment Analyzer")
+        st.sidebar.title("About App")
+        st.sidebar.header("This is an web app that analyzes the sentiments of tweets on the topic given by the user.")
+        st.sidebar.text("The source code is available here:")
+        st.sidebar.subheader('https://github.com/poshan0126/SentiMeter_Twitter_Sentiment_Analysis')
+
+
+        st.sidebar.title("About Developer")
+        st.sidebar.subheader("Poshan Panddey")
+        st.sidebar.subheader ('https://www.poshan.com.np/')
+        
+
         self.tweets = []
         self.tweetText = []
 
     def DownloadData(self):
         # authenticating with twitter keys
-        consumerKey = 'No Sharing of Keys for Privacy,Enter your own key'
-        consumerSecret = 'No Sharing of Keys for Privacy,Enter your own key'
-        accessToken = 'No Sharing of Keys for Privacy,Enter your own key'
-        accessTokenSecret = 'No Sharing of Keys for Privacy,Enter your own key'
+        consumerKey = 'uPYrQ6WzY7kLDTp9EI50isjOM'
+        consumerSecret = 'PduYBfVaMAVU4gA6nMpQGWzPy33GcAKIYWwn0bOSJInKrTXf5Z'
+        accessToken = '3548327834-cRI2c4nt60Z1h7NXBdhRSR8HQK58yVuPWDHMrpC'
+        accessTokenSecret = 'WNAwNxVnuBorE3vuB2ictAGofRN43dW9xM8Idv21OUtyc'
         auth = tweepy.OAuthHandler(consumerKey, consumerSecret)
         auth.set_access_token(accessToken, accessTokenSecret)
         api = tweepy.API(auth)
 
         # User input for keyword to be searched and the number of tweets to be analyzed
-        searchTerm = input("Enter Keyword/Tag to search tweets: ")
-        NoOfTerms = int(input("Enter number of tweets to analyze: "))
+        searchTerm = st.text_input("Enter your keyword to search in tweets:", "Global Warming")
+        NoOfTerms = st.number_input("Enter number of tweets to analyze:", value=100, step=10)
 
         # searching for tweets
         self.tweets = tweepy.Cursor(api.search, q=searchTerm, lang = "en").items(NoOfTerms)
@@ -94,22 +114,31 @@ class SentimentAnalysis:
         # printing out data
         print("After Analyzing " + str(NoOfTerms) + " tweets of  " + str(searchTerm) + ", On average we found:.")
         print()
-        print("General Report: ")
+        st.markdown("<h2 style='text-align: center; color: black;'>General Report:</h2>", unsafe_allow_html=True)
+
 
         if (polarity == 0):
-            print("Neutral")
+            st.markdown("<h2 style='text-align: center; color: blue;'>Neutral</h2>", unsafe_allow_html=True)
+
         elif (polarity > 0 and polarity <= 0.3):
-            print("Weakly Positive")
+            st.markdown("<h2 style='text-align: center; color: blue;'>Weakly Positive</h2>", unsafe_allow_html=True)
+
         elif (polarity > 0.3 and polarity <= 0.6):
-            print("Positive")
+            st.markdown("<h2 style='text-align: center; color: blue;'>Positive</h2>", unsafe_allow_html=True)
+
         elif (polarity > 0.6 and polarity <= 1):
-            print("Strongly Positive")
+            st.markdown("<h2 style='text-align: center; color: blue;'>Strongly Positive</h2>", unsafe_allow_html=True)
+
         elif (polarity > -0.3 and polarity <= 0):
-            print("Weakly Negative")
+            st.markdown("<h2 style='text-align: center; color: blue;'>Weakly Negative</h2>", unsafe_allow_html=True)
+
         elif (polarity > -0.6 and polarity <= -0.3):
-            print("Negative")
+            st.markdown("<h2 style='text-align: center; color: blue;'>Negative</h2>", unsafe_allow_html=True)
+
         elif (polarity > -1 and polarity <= -0.6):
-            print("Strongly Negative")
+            st.markdown("<h2 style='text-align: center; color: blue;'>Strongly Negative</h2>", unsafe_allow_html=True)
+
+        st.header("")
 
         print()
         print("Detailed Report: ")
@@ -143,7 +172,7 @@ class SentimentAnalysis:
         plt.title('After analyzing ' + str(noOfSearchTerms) + ' tweets on ' + searchTerm + ', On average we found:')
         plt.axis('equal')
         plt.tight_layout()
-        plt.show()
+        st.pyplot()
 
 
 
