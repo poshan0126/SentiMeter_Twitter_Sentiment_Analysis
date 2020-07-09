@@ -2,4 +2,3 @@ streamlit
 tweepy
 textblob
 matplotlib
-webbrowser
