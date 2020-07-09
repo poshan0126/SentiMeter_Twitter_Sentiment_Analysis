@@ -1,0 +1,8 @@
+streamlit
+sys
+tweepy
+csv
+re
+textblob
+matplotlib
+webbrowser
