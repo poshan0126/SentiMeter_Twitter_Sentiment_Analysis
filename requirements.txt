@@ -1,7 +1,5 @@
 streamlit
 tweepy
-csv
-re
 textblob
 matplotlib
 webbrowser
